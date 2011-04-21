@@ -20,8 +20,8 @@ function addJQuery(callback) {
 
 // the guts of this userscript
 function main() {
-    jQuery.noConflict(true);
-	jQuery(function($){
+    $j = jQuery.noConflict(true);
+	$j(function($){
 		var manual = $('#manual-container');
 		var sections = manual.find('.section[id^="zend."]');
 		
