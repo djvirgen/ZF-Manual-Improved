@@ -28,9 +28,11 @@
     var main = function() {
         jQuery(function($){
             var manual = $('#manual-container');
-            var container = $('<div class="section"></div>');
-            container.append('<div class="info"><h1 class="title"><strong>Table of Contents</strong></h1></div>');
-            var toc = function(section, container) {
+            var container = $('<div class="block"></div>');
+            container.append('<h2 class="navigation">Page Navigation</h2>');
+            var block = $('<div class="block-in"></div>');
+            container.append(block);
+            var toc = function(section, container, margin) {
                 var ul = $('<ul></ul>');
                 section.children('.section[id^="zend."]').each(function(){
                     var child = $(this);
@@ -40,18 +42,18 @@
                     link.html(child.find('h1.title:eq(0)').html());
                     li.append(link);
                     ul.append(li);
-                    toc(child, li);
+                    toc(child, li, '0 0 0 15px');
                 });
                 if (ul.length) {
                     ul.css({
-                        margin: '0 0 0 20px',
+                        margin: margin,
                         padding: 0
                     });
                     container.append(ul);
                 }
             };
-            toc(manual, container);
-            manual.find('hr:eq(0)').after(container);
+            toc(manual, block, 0);
+            $('div.right-nav').append(container);
         });
     };
 
